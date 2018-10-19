@@ -1,0 +1,27 @@
+sudo: required
+language: minimal
+services:
+  - docker
+
+env:
+  global:
+    # AWS_ACCESS_KEY_ID
+    - secure: ""
+    # AWS_SECRET_ACCESS_KEY
+    - secure: ""
+
+install:
+  - git clone https://github.com/Opetushallitus/ci-tools.git
+  - source ci-tools/common/setup-tools.sh
+  - export ARTIFACT_NAME="baseimage-war"
+
+script:
+  - export DOCKER_TARGET="${ECR_REPO}/${ARTIFACT_NAME}:ci-${TRAVIS_BUILD_NUMBER}"
+  - docker build -t ${DOCKER_TARGET} .
+  - docker images
+
+deploy:
+  provider: script
+  script: ./ci-tools/build/upload-image.sh $ARTIFACT_NAME
+  on:
+    all_branches: true
