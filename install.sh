@@ -106,3 +106,11 @@ rm -rf node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64
 
 echo "Init Prometheus config file"
 echo "{}" > /root/prometheus.yaml
+
+echo "Installing Tomcat"
+TOMCAT_DL_PREFIX="https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.88/bin"
+TOMCAT_PACKAGE="apache-tomcat-7.0.88.tar.gz"
+wget -c -q -P /tmp/ ${TOMCAT_DL_PREFIX}/${TOMCAT_PACKAGE}
+tar xf /tmp/${TOMCAT_PACKAGE} -C /opt/tomcat --strip-components=1
+rm -rf /tmp/*
+rm -rf /opt/tomcat/webapps/*
