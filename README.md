@@ -1,5 +1,7 @@
 # baseimage-war
 
+![Travis status](https://api.travis-ci.org/Opetushallitus/baseimage-war.svg?branch=master)
+
 A Docker base image for Tomcat war-based services.
 
 ## Building on top of this base image
