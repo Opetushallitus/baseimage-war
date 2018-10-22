@@ -10,7 +10,7 @@ To use this base image for your service, set the `BASE_IMAGE` variable in your `
 
 You can either use the latest master build (recommended):
 
-    export BASE_IMAGE="baseimage-war:latest-master"
+    export BASE_IMAGE="baseimage-war:master"
 
 or a specific version:
 
@@ -20,7 +20,7 @@ After you have set the variable, the `pull-image.sh` script pulls the correct im
 
 ## Contributing
 
-Please use branches to avoid producing a broken image with the `latest-master` tag. You can test your branch builds by pulling the specific version for a service.
+Please use branches to avoid producing a broken image with the `master` tag. You can test your branch builds by pulling the specific version for a service.
 
 You can test the build locally on your machine by running:
 
