@@ -22,7 +22,6 @@ script:
 
 deploy:
   provider: script
-  script: >-
-    ./ci-tools/build/upload-image.sh $ARTIFACT_NAME $TRAVIS_BRANCH
+  script: ./ci-tools/build/upload-image.sh $ARTIFACT_NAME $TRAVIS_BRANCH
   on:
     all_branches: true
