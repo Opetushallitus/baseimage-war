@@ -23,10 +23,6 @@ script:
 deploy:
   provider: script
   script: >-
-    ./ci-tools/build/upload-image.sh $ARTIFACT_NAME &&
-    export BRANCH_TAG="${ECR_REPO}/${ARTIFACT_NAME}:${TRAVIS_BRANCH}" &&
-    echo $BRANCH_TAG &&
-    docker tag $DOCKER_TARGET $BRANCH_TAG &&
-    docker push $BRANCH_TAG
+    ./ci-tools/build/upload-image.sh $ARTIFACT_NAME $TRAVIS_BRANCH
   on:
     all_branches: true
