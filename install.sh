@@ -66,7 +66,6 @@ mkdir -p /usr/java/latest
 tar xf /tmp/${JDK_PACKAGE} -C /usr/java/latest --strip-components=1
 ln -s /usr/java/latest/bin/* /usr/bin/
 unzip -jo -d /usr/java/latest/jre/lib/security /tmp/${JCE_PACKAGE}
-rm -rf /tmp/*
 
 echo "Removing unused JDK sources and libraries"
 rm /usr/java/latest/jre/lib/security/README.txt
@@ -111,6 +110,15 @@ echo "Installing Tomcat"
 TOMCAT_DL_PREFIX="https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.88/bin"
 TOMCAT_PACKAGE="apache-tomcat-7.0.88.tar.gz"
 wget -c -q -P /tmp/ ${TOMCAT_DL_PREFIX}/${TOMCAT_PACKAGE}
+mkdir -p /opt/tomcat
 tar xf /tmp/${TOMCAT_PACKAGE} -C /opt/tomcat --strip-components=1
-rm -rf /tmp/*
 rm -rf /opt/tomcat/webapps/*
+
+echo "Copying Tomcat configuration"
+mkdir -p /root/oph-configuration/
+mv /tmp/tomcat-config/server.xml /opt/tomcat/conf/
+mv /tmp/tomcat-config/ehcache.xml /root/oph-configuration/
+mv /tmp/tomcat-config/jars/*.jar /opt/tomcat/lib/
+
+echo "Clearing temp directory"
+rm -rf /tmp/*
