@@ -2,7 +2,7 @@
 
 ![Travis status](https://api.travis-ci.org/Opetushallitus/baseimage-war.svg?branch=master)
 
-A Docker base image for Tomcat war-based services.
+A Docker base image for war-based services.
 
 ## Building on top of this base image
 
