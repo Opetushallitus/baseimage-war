@@ -102,6 +102,8 @@ mv /tmp/tomcat-config/jars/*.jar /opt/tomcat/lib/
 echo "Clearing temp directory"
 ls -la /tmp/
 rm -rf /tmp/tomcat-config
+rm -rf /tmp/*.tar.gz
+rm -rf /tmp/hsperfdata_root
 
 echo "Make run script executable"
 chmod ug+x /tmp/scripts/run
