@@ -56,9 +56,9 @@ echo "Generating SSH key and getting GitHub public keys"
 /usr/bin/ssh-keyscan -H github.com >> /root/.ssh/known_hosts
 
 echo "Installing Java JDK"
-JDK_DL_PREFIX="http://download.oracle.com/otn-pub/java/jdk/8u192-b12/750e1c8617c5452694857ad95c3ee230"
-JDK_PACKAGE="jdk-8u192-linux-x64.tar.gz"
-JCE_DL_PREFIX="http://download.oracle.com/otn-pub/java/jce/8"
+JDK_DL_PREFIX="https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60"
+JDK_PACKAGE="jdk-8u201-linux-x64.tar.gz"
+JCE_DL_PREFIX="https://download.oracle.com/otn-pub/java/jce/8"
 JCE_PACKAGE="jce_policy-8.zip"
 wget -c -q -P /tmp/ --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JDK_DL_PREFIX}/${JDK_PACKAGE}
 wget -c -q -P /tmp/ --header "Cookie: oraclelicense=accept-securebackup-cookie" ${JCE_DL_PREFIX}/${JCE_PACKAGE}
@@ -121,10 +121,11 @@ mv /tmp/tomcat-config/ehcache.xml /root/oph-configuration/
 mv /tmp/tomcat-config/jars/*.jar /opt/tomcat/lib/
 
 echo "Clearing temp directory"
-ls -la /tmp/
 rm -rf /tmp/tomcat-config
 rm -rf /tmp/*.tar.gz
+rm -rf /tmp/*.zip
 rm -rf /tmp/hsperfdata_root
+ls -la /tmp/
 
 echo "Make run script executable"
 chmod ug+x /tmp/scripts/run
