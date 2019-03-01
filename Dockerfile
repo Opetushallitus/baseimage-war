@@ -2,6 +2,7 @@ FROM alpine:latest
 
 COPY files/dump_threads.sh /root/bin/
 COPY files/tomcat/ /tmp/tomcat-config/
+COPY files/run.sh /tmp/scripts/run
 
 WORKDIR /root/
 COPY *.sh ./
