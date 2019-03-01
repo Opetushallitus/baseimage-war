@@ -86,4 +86,8 @@ mv /tmp/tomcat-config/ehcache.xml /root/oph-configuration/
 mv /tmp/tomcat-config/jars/*.jar /opt/tomcat/lib/
 
 echo "Clearing temp directory"
-rm -rf /tmp/*
+ls -la /tmp/
+rm -rf /tmp/tomcat-config
+
+echo "Make run script executable"
+chmod ug+x /tmp/scripts/run
