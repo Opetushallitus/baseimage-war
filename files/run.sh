@@ -50,11 +50,9 @@ nohup /root/node_exporter > /root/node_exporter.log  2>&1 &
 
 if [ ${DEBUG_ENABLED} == "true" ]; then
   echo "JDWP debugging enabled..."
-  STANDALONE_DEBUG_PARAMS=" -Xdebug -Xrunjdwp:transport=dt_socket,address=1233,server=y,suspend=n"
   DEBUG_PARAMS=" -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1233"
 else
   echo "JDWP debugging disabled..."
-  STANDALONE_DEBUG_PARAMS=""
   DEBUG_PARAMS=""
 fi
 
