@@ -45,12 +45,6 @@ mkdir -p /root/logs
 mkdir -p /root/tomcat
 ln -s /root/logs/ /root/tomcat/logs
 
-# PP-299: This symlink is for backwards-compatibility and can be removed once no services use base-legacy image
-if [ -f "/root/jmx_prometheus_javaagent-0.10.jar" ]; then
-  echo "Found legacy jmx_exporter, symlinking it to a versionless name"
-  ln -s /root/jmx_prometheus_javaagent-0.10.jar /root/jmx_prometheus_javaagent.jar
-fi
-
 echo "Starting Prometheus node_exporter..."
 nohup /root/node_exporter > /root/node_exporter.log  2>&1 &
 
