@@ -51,10 +51,6 @@ echo "Creating cache directories for package managers"
 mkdir /root/.m2/
 mkdir /root/.ivy2/
 
-echo "Generating SSH key and getting GitHub public keys"
-/usr/bin/ssh-keygen -q -t rsa -f /root/.ssh/id_rsa -N ""
-/usr/bin/ssh-keyscan -H github.com >> /root/.ssh/known_hosts
-
 echo "Installing Prometheus jmx_exporter"
 JMX_EXPORTER_VERSION="0.3.1"
 wget -q https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/${JMX_EXPORTER_VERSION}/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar
