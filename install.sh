@@ -51,10 +51,6 @@ echo "Creating cache directories for package managers"
 mkdir /root/.m2/
 mkdir /root/.ivy2/
 
-echo "Generating SSH key and getting GitHub public keys"
-/usr/bin/ssh-keygen -q -t rsa -f /root/.ssh/id_rsa -N ""
-/usr/bin/ssh-keyscan -H github.com >> /root/.ssh/known_hosts
-
 echo "Installing Java JDK"
 JDK_DL_PREFIX="https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60"
 JDK_PACKAGE="jdk-8u201-linux-x64.tar.gz"
