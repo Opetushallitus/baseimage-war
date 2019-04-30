@@ -57,15 +57,6 @@ echo "Creating cache directories for package managers"
 mkdir /root/.m2/
 mkdir /root/.ivy2/
 
-echo "Downloading Java JDK"
-FILES_URL_PREFIX="https://oph-public-files.s3-eu-west-1.amazonaws.com/${DL_PATH_TOKEN}/jdk"
-JDK_PACKAGE="jdk-8u202-linux-x64.tar.gz"
-JCE_PACKAGE="jce_policy-8.zip"
-wget -c -q -P /tmp/ ${FILES_URL_PREFIX}/${JDK_PACKAGE}
-echo "9a5c32411a6a06e22b69c495b7975034409fa1652d03aeb8eb5b6f59fd4594e0  /tmp/${JDK_PACKAGE}" |sha256sum -c
-wget -c -q -P /tmp/ ${FILES_URL_PREFIX}/${JCE_PACKAGE}
-echo "f3020a3922efd6626c2fff45695d527f34a8020e938a49292561f18ad1320b59  /tmp/${JCE_PACKAGE}" |sha256sum -c
-
 echo "Installing Prometheus jmx_exporter"
 JMX_EXPORTER_VERSION="0.3.1"
 wget -q https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/${JMX_EXPORTER_VERSION}/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar
