@@ -31,7 +31,6 @@ pip install \
   jinja2 \
   jinja2-cli \
   pyasn1 \
-  pyyaml \
   six
 rm -rf /root/.cache
 
