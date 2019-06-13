@@ -12,7 +12,11 @@ You can either use the latest master build (recommended):
 
     export BASE_IMAGE="baseimage-war:master"
 
-or a specific version:
+or the latest build of a specific branch:
+
+    export BASE_IMAGE="baseimage-war:jdk11"
+
+or a specific build:
 
     export BASE_IMAGE="baseimage-war:ci-9"
 
@@ -24,4 +28,8 @@ Please use branches to avoid producing a broken image with the `master` tag. You
 
 You can test the build locally on your machine by running:
 
-    docker build -t baseimage-war:latest .
+    docker build -t baseimage-war:latest --build-arg DL_PATH_TOKEN="${DL_PATH_TOKEN}" .
+
+Where `DL_PATH_TOKEN` is the path prefix in the `oph-public-files` bucket, which can be retrieved locally with:
+
+    aws s3 ls s3://oph-public-files --profile oph-utility|sed 's/.*PRE \(.*\)\//\1/g'
