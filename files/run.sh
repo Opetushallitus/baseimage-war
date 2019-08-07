@@ -35,11 +35,7 @@ CACERTSPWD="`grep "java_cacerts_pwd" /etc/oph-environment/opintopolku.yml | grep
 if [ -f "${CERT}" ]; then
   echo "Installing local certificates to Java..."
   openssl x509 -outform der -in ${CERT} -out /tmp/ssl.der
-<<<<<<< HEAD
-  keytool -import -noprompt -storepass ${CACERTSPWD} -alias opintopolku -keystore /usr/java/latest/jre/lib/security/cacerts -file /tmp/ssl
-=======
-  keytool -import -noprompt -storepass ${CACERTSPWD} -alias opintopolku -keystore /opt/java/openjdk/lib/security/cacerts -file /tmp/ssl
->>>>>>> PP-413: Add run script to baseimage
+  keytool -import -noprompt -storepass ${CACERTSPWD} -alias opintopolku -keystore /opt/java/openjdk/jre/lib/security/cacerts -file /tmp/ssl
 fi
 
 export LC_CTYPE=fi_FI.UTF-8
@@ -49,40 +45,26 @@ mkdir -p /root/logs
 mkdir -p /root/tomcat
 ln -s /root/logs/ /root/tomcat/logs
 
-<<<<<<< HEAD
-=======
 # PP-299: This symlink is for backwards-compatibility and can be removed once no services use base-legacy image
 if [ -f "/root/jmx_prometheus_javaagent-0.10.jar" ]; then
   echo "Found legacy jmx_exporter, symlinking it to a versionless name"
   ln -s /root/jmx_prometheus_javaagent-0.10.jar /root/jmx_prometheus_javaagent.jar
 fi
 
->>>>>>> PP-413: Add run script to baseimage
 echo "Starting Prometheus node_exporter..."
 nohup /root/node_exporter > /root/node_exporter.log  2>&1 &
 
 if [ ${DEBUG_ENABLED} == "true" ]; then
   echo "JDWP debugging enabled..."
-<<<<<<< HEAD
-  DEBUG_PARAMS=" -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1233"
+  DEBUG_PARAMS=" -Xdebug -Xrunjdwp:transport=dt_socket,address=1233,server=y,suspend=n"
 else
   echo "JDWP debugging disabled..."
-  DEBUG_PARAMS=""
-fi
-
-=======
-  STANDALONE_DEBUG_PARAMS=" -Xdebug -Xrunjdwp:transport=dt_socket,address=1233,server=y,suspend=n"
-  DEBUG_PARAMS=" -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1233"
-else
-  echo "JDWP debugging disabled..."
-  STANDALONE_DEBUG_PARAMS=""
   DEBUG_PARAMS=""
 fi
 
 export HOME="/root"
 export LOGS="${HOME}/logs"
 
->>>>>>> PP-413: Add run script to baseimage
 echo "Using java options: ${JAVA_OPTS}"
 echo "Using secret java options: ${SECRET_JAVA_OPTS}"
 
@@ -109,16 +91,12 @@ JAVA_OPTS="$JAVA_OPTS
   -Dcom.sun.management.jmxremote.local.only=false
   -Djava.rmi.server.hostname=localhost
   -javaagent:/root/jmx_prometheus_javaagent.jar=1134:/root/prometheus.yaml
-<<<<<<< HEAD
+  -Xloggc:${LOGS}/${NAME}_gc.log
   -XX:+PrintGCDetails
   -XX:+PrintGCTimeStamps
-  -Xloggc:/root/logs/tomcat_gc.log
   -XX:+UseGCLogFileRotation
   -XX:NumberOfGCLogFiles=10
   -XX:GCLogFileSize=10m
-=======
-  -Xlog:gc*:file=${LOGS}/${NAME}_gc.log:uptime:filecount=10,filesize=10m
->>>>>>> PP-413: Add run script to baseimage
   -XX:+HeapDumpOnOutOfMemoryError
   -XX:HeapDumpPath=/root/dumps/tomcat_heap_dump-`date +%Y-%m-%d-%H-%M-%S`.hprof
   -XX:ErrorFile=/root/logs/tomcat_hs_err.log

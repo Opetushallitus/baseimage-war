@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:alpine-slim
+FROM adoptopenjdk/openjdk8:alpine-slim
 
 ARG DL_PATH_TOKEN
 
