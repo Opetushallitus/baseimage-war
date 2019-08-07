@@ -1,6 +1,4 @@
-FROM alpine:latest
-
-ARG DL_PATH_TOKEN
+FROM adoptopenjdk/openjdk8:alpine-slim
 
 COPY files/dump_threads.sh /root/bin/
 COPY files/tomcat/ /tmp/tomcat-config/

@@ -35,7 +35,7 @@ CACERTSPWD="`grep "java_cacerts_pwd" /etc/oph-environment/opintopolku.yml | grep
 if [ -f "${CERT}" ]; then
   echo "Installing local certificates to Java..."
   openssl x509 -outform der -in ${CERT} -out /tmp/ssl.der
-  keytool -import -noprompt -storepass ${CACERTSPWD} -alias opintopolku -keystore /usr/java/latest/jre/lib/security/cacerts -file /tmp/ssl
+  keytool -import -noprompt -storepass ${CACERTSPWD} -alias opintopolku -keystore /opt/java/openjdk/jre/lib/security/cacerts -file /tmp/ssl
 fi
 
 export LC_CTYPE=fi_FI.UTF-8
@@ -50,11 +50,14 @@ nohup /root/node_exporter > /root/node_exporter.log  2>&1 &
 
 if [ ${DEBUG_ENABLED} == "true" ]; then
   echo "JDWP debugging enabled..."
-  DEBUG_PARAMS=" -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1233"
+  DEBUG_PARAMS=" -Xdebug -Xrunjdwp:transport=dt_socket,address=1233,server=y,suspend=n"
 else
   echo "JDWP debugging disabled..."
   DEBUG_PARAMS=""
 fi
+
+export HOME="/root"
+export LOGS="${HOME}/logs"
 
 echo "Using java options: ${JAVA_OPTS}"
 echo "Using secret java options: ${SECRET_JAVA_OPTS}"
@@ -82,9 +85,9 @@ JAVA_OPTS="$JAVA_OPTS
   -Dcom.sun.management.jmxremote.local.only=false
   -Djava.rmi.server.hostname=localhost
   -javaagent:/root/jmx_prometheus_javaagent.jar=1134:/root/prometheus.yaml
+  -Xloggc:${LOGS}/${NAME}_gc.log
   -XX:+PrintGCDetails
   -XX:+PrintGCTimeStamps
-  -Xloggc:/root/logs/tomcat_gc.log
   -XX:+UseGCLogFileRotation
   -XX:NumberOfGCLogFiles=10
   -XX:GCLogFileSize=10m

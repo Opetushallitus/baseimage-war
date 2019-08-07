@@ -57,44 +57,6 @@ echo "Creating cache directories for package managers"
 mkdir /root/.m2/
 mkdir /root/.ivy2/
 
-echo "Downloading Java JDK"
-FILES_URL_PREFIX="https://oph-public-files.s3-eu-west-1.amazonaws.com/${DL_PATH_TOKEN}/jdk"
-JDK_PACKAGE="jdk-8u202-linux-x64.tar.gz"
-JCE_PACKAGE="jce_policy-8.zip"
-wget -c -q -P /tmp/ ${FILES_URL_PREFIX}/${JDK_PACKAGE}
-echo "9a5c32411a6a06e22b69c495b7975034409fa1652d03aeb8eb5b6f59fd4594e0  /tmp/${JDK_PACKAGE}" |sha256sum -c
-wget -c -q -P /tmp/ ${FILES_URL_PREFIX}/${JCE_PACKAGE}
-echo "f3020a3922efd6626c2fff45695d527f34a8020e938a49292561f18ad1320b59  /tmp/${JCE_PACKAGE}" |sha256sum -c
-
-echo "Installing Java JDK"
-mkdir -p /usr/java/latest
-tar xf /tmp/${JDK_PACKAGE} -C /usr/java/latest --strip-components=1
-ln -s /usr/java/latest/bin/* /usr/bin/
-unzip -jo -d /usr/java/latest/jre/lib/security /tmp/${JCE_PACKAGE}
-
-echo "Removing unused JDK sources and libraries"
-rm /usr/java/latest/jre/lib/security/README.txt
-rm -rf /usr/java/latest/*src.zip
-rm -rf /usr/java/latest/lib/missioncontrol
-rm -rf /usr/java/latest/lib/visualvm
-rm -rf /usr/java/latest/lib/*javafx*
-rm -rf /usr/java/latest/jre/lib/plugin.jar
-rm -rf /usr/java/latest/jre/lib/ext/jfxrt.jar
-rm -rf /usr/java/latest/jre/bin/javaws
-rm -rf /usr/java/latest/jre/lib/javaws.jar
-rm -rf /usr/java/latest/jre/lib/desktop
-rm -rf /usr/java/latest/jre/plugin/
-rm -rf /usr/java/latest/jre/lib/deploy*
-rm -rf /usr/java/latest/jre/lib/*javafx*
-rm -rf /usr/java/latest/jre/lib/*jfx*
-rm -rf /usr/java/latest/jre/lib/amd64/libdecora_sse.so
-rm -rf /usr/java/latest/jre/lib/amd64/libprism_*.so
-rm -rf /usr/java/latest/jre/lib/amd64/libfxplugins.so
-rm -rf /usr/java/latest/jre/lib/amd64/libglass.so
-rm -rf /usr/java/latest/jre/lib/amd64/libgstreamer-lite.so
-rm -rf /usr/java/latest/jre/lib/amd64/libjavafx*.so
-rm -rf /usr/java/latest/jre/lib/amd64/libjfx*.so
-
 echo "Installing Prometheus jmx_exporter"
 JMX_EXPORTER_VERSION="0.3.1"
 wget -q https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/${JMX_EXPORTER_VERSION}/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar
@@ -129,11 +91,10 @@ mv /tmp/tomcat-config/ehcache.xml /root/oph-configuration/
 mv /tmp/tomcat-config/jars/*.jar /opt/tomcat/lib/
 
 echo "Clearing temp directory"
+ls -la /tmp/
 rm -rf /tmp/tomcat-config
 rm -rf /tmp/*.tar.gz
-rm -rf /tmp/*.zip
 rm -rf /tmp/hsperfdata_root
-ls -la /tmp/
 
 echo "Make run script executable"
 chmod ug+x /tmp/scripts/run

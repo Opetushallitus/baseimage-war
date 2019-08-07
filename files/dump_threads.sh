@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-jstack `pidof java`
+jcmd `pidof java` Thread.print
