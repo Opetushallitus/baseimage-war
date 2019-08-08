@@ -28,8 +28,4 @@ Please use branches to avoid producing a broken image with the `master` tag. You
 
 You can test the build locally on your machine by running:
 
-    docker build -t baseimage-war:latest --build-arg DL_PATH_TOKEN="${DL_PATH_TOKEN}" .
-
-Where `DL_PATH_TOKEN` is the path prefix in the `oph-public-files` bucket, which can be retrieved locally with:
-
-    aws s3 ls s3://oph-public-files --profile oph-utility|sed 's/.*PRE \(.*\)\//\1/g'
+    docker build -t baseimage-war:latest .
