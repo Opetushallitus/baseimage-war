@@ -6,8 +6,15 @@
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
   <Service name="Catalina">
-    <Connector port="8080" protocol="org.apache.coyote.http11.Http11NioProtocol" connectionTimeout="75000" secure="true" scheme="https"
-               SSLEnabled="false" proxyPort="443" maxThreads="50" asyncTimeout="150000" />
+    <Connector port="8080"
+               protocol="org.apache.coyote.http11.Http11NioProtocol"
+               connectionTimeout="75000"
+               secure="true"
+               scheme="https"
+               SSLEnabled="false"
+               proxyPort="443"
+               maxThreads="50"
+               asyncTimeout="150000"/>
     <Connector port="8009" protocol="AJP/1.3" maxThreads="1000" />
     <Engine name="Catalina" defaultHost="localhost">
       <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">
