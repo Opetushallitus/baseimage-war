@@ -44,7 +44,7 @@ done
 echo "Copying keystore file to home directory"
 cp /opt/java/openjdk/jre/lib/security/cacerts /home/oph/
 
-CACERTSPWD="`grep "java_cacerts_pwd" /etc/oph-environment/opintopolku.yml | grep -o -e '\".*\"' | sed 's/^\"\(.*\)\"$/\1/'`"
+CACERTSPWD="`grep "java_cacerts_pwd" ${CONFIGPATH}/opintopolku.yml | grep -o -e '\".*\"' | sed 's/^\"\(.*\)\"$/\1/'`"
 if [ -f "${CERT}" ]; then
   echo "Installing local certificates to Java..."
   openssl x509 -outform der -in ${CERT} -out /tmp/ssl.der
@@ -55,10 +55,14 @@ export LC_CTYPE=fi_FI.UTF-8
 export JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8'
 export JMX_PORT=1133
 
-mkdir -p ${CATALINA_BASE}/{bin,conf,lib,logs,webapps,work}
-mkdir -p ${CATALINA_TMPDIR}
-mkdir -p /home/oph/{logs,dumps}
+for directory in bin conf lib logs webapps work; do
+  mkdir -p ${CATALINA_BASE}/${directory}
+done
+for directory in logs dumps; do
+  mkdir -p /home/oph/${directory}
+done
 ln -s /home/oph/logs/ ${CATALINA_BASE}/logs
+mkdir -p ${CATALINA_TMPDIR}
 
 echo "Starting Prometheus node_exporter..."
 nohup /usr/local/bin/node_exporter > /home/oph/node_exporter.log  2>&1 &
