@@ -12,6 +12,9 @@ CATALINA_TMPDIR="/tmp/catalina_temp"
 echo "Copying templates to home directory"
 cp -vr /etc/oph/* ${BASEPATH}
 
+echo "Copying war file to CATALINA_HOME/webapps"
+cp -vr /opt/catalina/webapps/* ${CATALINA_BASE}/webapps/
+
 echo "Downloading environment-specific properties"
 env_config_path=${ENV_CONFIG_S3_PATH:-/services/}
 env_config_version=${ENV_CONFIG_VERSION:-latest}
