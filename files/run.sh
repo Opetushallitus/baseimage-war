@@ -7,6 +7,7 @@ VARS="${CONFIGPATH}/opintopolku.yml"
 CERT="${CONFIGPATH}/cert/ssl.pem"
 LOGPATH="${CONFIGPATH}/log"
 CATALINA_BASE="/home/oph/tomcat"
+CATALINA_HOME="/opt/tomcat"
 CATALINA_TMPDIR="/tmp/catalina_temp"
 
 echo "Copying templates to home directory"
@@ -197,7 +198,7 @@ SERVERXML
     fi
 
     echo "Starting application..."
-    exec ${CATALINA_BASE}/bin/catalina.sh run
+    exec ${CATALINA_HOME}/bin/catalina.sh run
 else
   echo "Fatal error: No war found, exiting!"
   exit 1
