@@ -12,9 +12,6 @@ CATALINA_TMPDIR="/tmp/catalina_temp"
 echo "Copying templates to home directory"
 cp -vr /etc/oph/* ${BASEPATH}
 
-echo "Copying war file to CATALINA_HOME/webapps"
-cp -vr /opt/tomcat/webapps/* ${CATALINA_BASE}/webapps/
-
 echo "Downloading environment-specific properties"
 env_config_path=${ENV_CONFIG_S3_PATH:-/services/}
 env_config_version=${ENV_CONFIG_VERSION:-latest}
@@ -66,6 +63,9 @@ for directory in logs dumps; do
 done
 ln -s /home/oph/logs/ ${CATALINA_BASE}/logs
 mkdir -p ${CATALINA_TMPDIR}
+
+echo "Copying war file to CATALINA_HOME/webapps"
+cp -vr /opt/tomcat/webapps/* ${CATALINA_BASE}/webapps/
 
 echo "Starting Prometheus node_exporter..."
 nohup /usr/local/bin/node_exporter > /home/oph/node_exporter.log  2>&1 &
