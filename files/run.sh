@@ -67,6 +67,8 @@ mkdir -p ${CATALINA_TMPDIR}
 
 echo "Copying war file to CATALINA_BASE/webapps"
 cp -vr /opt/tomcat/webapps/* ${CATALINA_BASE}/webapps/
+cp -vr /opt/tomcat/conf/* ${CATALINA_BASE}/conf/
+
 
 echo "Starting Prometheus node_exporter..."
 nohup /usr/local/bin/node_exporter > /home/oph/node_exporter.log  2>&1 &
