@@ -92,6 +92,7 @@ echo "675abed4e71e95793f549a2077d891e28f2f8e3427aca180d2ff6607be8885be  /tmp/${T
 mkdir -p /opt/tomcat
 tar xf /tmp/${TOMCAT_PACKAGE} -C /opt/tomcat --strip-components=1
 rm -rf /opt/tomcat/webapps/*
+chown -R oph:oph /opt/tomcat
 
 echo "Clearing temp directory"
 ls -la /tmp/
