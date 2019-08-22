@@ -8,7 +8,7 @@ CERT="${CONFIGPATH}/cert/ssl.pem"
 LOGPATH="${CONFIGPATH}/log"
 export CATALINA_BASE="/home/oph/tomcat"
 export CATALINA_HOME="/opt/tomcat"
-exprot CATALINA_TMPDIR="/tmp/catalina_temp"
+export CATALINA_TMPDIR="/tmp/catalina_temp"
 
 echo "Copying templates to home directory"
 cp -vr /etc/oph/* ${BASEPATH}
@@ -56,7 +56,7 @@ export LC_CTYPE=fi_FI.UTF-8
 export JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8'
 export JMX_PORT=1133
 
-for directory in bin conf lib logs webapps work; do
+for directory in bin conf lib logs temp webapps work; do
   mkdir -p ${CATALINA_BASE}/${directory}
 done
 for directory in logs dumps; do
