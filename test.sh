@@ -11,7 +11,7 @@ cat /etc/alpine-release
 echo "Test that baseimage has files expected by the application during run script"
 ls -la /opt/tomcat/bin/catalina.sh
 ls -la /opt/tomcat/conf/server.xml
-ls -la /home/oph/oph-configuration/ehcache.xml
+ls -la /etc/oph/oph-configuration/ehcache.xml
 ls -la /opt/tomcat/lib/log4j*
 ls -la /opt/tomcat/lib/logback-*
 ls -la /usr/local/bin/jmx_prometheus_javaagent.jar
