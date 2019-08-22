@@ -6,9 +6,9 @@ CONFIGPATH="/home/oph/oph-environment"
 VARS="${CONFIGPATH}/opintopolku.yml"
 CERT="${CONFIGPATH}/cert/ssl.pem"
 LOGPATH="${CONFIGPATH}/log"
-CATALINA_BASE="/home/oph/tomcat"
-CATALINA_HOME="/opt/tomcat"
-CATALINA_TMPDIR="/tmp/catalina_temp"
+export CATALINA_BASE="/home/oph/tomcat"
+export CATALINA_HOME="/opt/tomcat"
+exprot CATALINA_TMPDIR="/tmp/catalina_temp"
 
 echo "Copying templates to home directory"
 cp -vr /etc/oph/* ${BASEPATH}
@@ -65,7 +65,7 @@ done
 ln -s /home/oph/logs/ ${CATALINA_BASE}/logs
 mkdir -p ${CATALINA_TMPDIR}
 
-echo "Copying war file to CATALINA_HOME/webapps"
+echo "Copying war file to CATALINA_BASE/webapps"
 cp -vr /opt/tomcat/webapps/* ${CATALINA_BASE}/webapps/
 
 echo "Starting Prometheus node_exporter..."
