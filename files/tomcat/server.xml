@@ -14,8 +14,7 @@
                SSLEnabled="false"
                proxyPort="443"
                maxThreads="50"
-               socket.soTimeout="1800000"
-               asyncTimeout="300000"/>
+               socket.soTimeout="1800000"/>
     <Connector port="8009" protocol="AJP/1.3" maxThreads="1000" />
     <Engine name="Catalina" defaultHost="localhost">
       <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">
