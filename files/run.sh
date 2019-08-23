@@ -56,7 +56,7 @@ export LC_CTYPE=fi_FI.UTF-8
 export JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8'
 export JMX_PORT=1133
 
-for directory in bin conf lib logs temp webapps work; do
+for directory in bin conf lib temp webapps work; do
   mkdir -p ${CATALINA_BASE}/${directory}
 done
 for directory in logs dumps; do
@@ -193,7 +193,7 @@ SERVERXML
         ;;
     esac
 
-    CONTEXT="${CATALINA_BASE}/conf/context.xml"
+    CONTEXT="${BASEPATH}/oph-configuration/context.xml"
     if [ -f ${CONTEXT} ]; then
       echo "Create context.conf"
       j2 ${CONTEXT} ${VARS} > ${CATALINA_BASE}/conf/context.xml || true
