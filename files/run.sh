@@ -59,9 +59,6 @@ export JMX_PORT=1133
 for directory in bin conf lib temp webapps work; do
   mkdir -p ${CATALINA_BASE}/${directory}
 done
-for directory in logs dumps; do
-  mkdir -p /home/oph/${directory}
-done
 ln -s /home/oph/logs/ ${CATALINA_BASE}/logs
 mkdir -p ${CATALINA_TMPDIR}
 
