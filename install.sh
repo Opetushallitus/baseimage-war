@@ -14,15 +14,9 @@ apk --no-cache add \
   python \
   py-jinja2 \
   py-pip \
-  ttf-dejavu \
   unzip \
   wget \
   zip
-
-echo "Kludging font libraries in place"
-ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so && \
-  ln -s /lib/libuuid.so.1 /usr/lib/libuuid.so.1 && \
-  ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1
 
 echo "Install specific version of PyYAML for awscli, fixes version conflict"
 rm -rf /usr/lib/python3/dist-packages/PyYAML-*

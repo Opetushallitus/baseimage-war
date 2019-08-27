@@ -17,9 +17,6 @@ ls -la /opt/tomcat/lib/logback-*
 ls -la /usr/local/bin/jmx_prometheus_javaagent.jar
 ls -la /usr/local/bin/node_exporter
 ls -la /usr/local/bin/run
-ls -la /usr/lib/libfontconfig.so
-ls -la /usr/lib/libuuid.so.1
-ls -la /usr/lib/libc.musl-x86_64.so.1
 
 echo "Largest directories:"
 du -d 3 -m /|sort -nr|head -n 20

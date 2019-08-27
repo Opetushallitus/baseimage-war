@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:alpine-slim
+FROM adoptopenjdk/openjdk11:alpine-slim
 
 RUN addgroup -S oph -g 1001 && adduser -u 1001 -S -G oph oph
 

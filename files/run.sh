@@ -43,7 +43,7 @@ do
 done
 
 echo "Copying keystore file to home directory"
-cp /opt/java/openjdk/jre/lib/security/cacerts /home/oph/
+cp /opt/java/openjdk/lib/security/cacerts /home/oph/
 
 CACERTSPWD="`grep "java_cacerts_pwd" ${CONFIGPATH}/opintopolku.yml | grep -o -e '\".*\"' | sed 's/^\"\(.*\)\"$/\1/'`"
 if [ -f "${CERT}" ]; then
@@ -72,7 +72,7 @@ nohup /usr/local/bin/node_exporter > /home/oph/node_exporter.log  2>&1 &
 
 if [ ${DEBUG_ENABLED} == "true" ]; then
   echo "JDWP debugging enabled..."
-  DEBUG_PARAMS=" -Xdebug -Xrunjdwp:transport=dt_socket,address=1233,server=y,suspend=n"
+  DEBUG_PARAMS=" -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1233"
 else
   echo "JDWP debugging disabled..."
   DEBUG_PARAMS=""
@@ -107,12 +107,7 @@ JAVA_OPTS="$JAVA_OPTS
   -Dcom.sun.management.jmxremote.local.only=false
   -Djava.rmi.server.hostname=localhost
   -javaagent:/usr/local/bin/jmx_prometheus_javaagent.jar=1134:/etc/prometheus.yaml
-  -Xloggc:${LOGS}/${NAME}_gc.log
-  -XX:+PrintGCDetails
-  -XX:+PrintGCTimeStamps
-  -XX:+UseGCLogFileRotation
-  -XX:NumberOfGCLogFiles=10
-  -XX:GCLogFileSize=10m
+  -Xlog:gc*:file=${LOGS}/${NAME}_gc.log:uptime:filecount=10,filesize=10m
   -XX:+HeapDumpOnOutOfMemoryError
   -XX:HeapDumpPath=/home/oph/dumps/tomcat_heap_dump-`date +%Y-%m-%d-%H-%M-%S`.hprof
   -XX:ErrorFile=/home/oph/logs/tomcat_hs_err.log
