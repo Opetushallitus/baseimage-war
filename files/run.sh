@@ -92,6 +92,7 @@ if [ `ls -l ${CATALINA_BASE}/webapps/ | wc -l` -ne 1 ]; then
 JAVA_OPTS="$JAVA_OPTS
   ${SECRET_JAVA_OPTS}
   -Duser.home=/home/oph
+  -Djavax.net.ssl.trustStore=${HOME}/cacerts
   -Dlog4j.debug=true
   -Djava.util.logging.config.file=${LOGPATH}/logging.properties
   -Djuli-logback.configurationFile=file://${LOGPATH}/logback-tomcat.xml
