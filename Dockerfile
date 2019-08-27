@@ -14,3 +14,8 @@ RUN \
   sh install.sh && \
   sh test.sh && \
   rm *.sh
+
+RUN echo "Remove /root and symlink /root to /home/oph for backwards compatibility"
+RUN rm -rf /root && \
+    ln -s /home/oph /root && \
+    chown oph:oph -h /root

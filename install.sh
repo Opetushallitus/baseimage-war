@@ -91,12 +91,5 @@ ls -la /tmp/
 rm -rf /tmp/*.tar.gz
 rm -rf /tmp/hsperfdata_root
 
-echo "Symlink /root/logs,dumps to /home/oph/logs,dumps for backwards compatibility"
-chown -R oph:oph /root
-for path in logs dumps; do
-  ln -s /home/oph/$path /root/$path
-  chown oph:oph -h /root/$path
-done
-
 echo "Make run script executable"
 chmod ug+x /usr/local/bin/run
