@@ -154,6 +154,7 @@ SETENV
     echo "Create modified server.xml for eperusteet"
     case ${NAME} in
       eperusteet|eperusteet-amosaa|eperusteet-ylops|eperusteet-opintopolku)
+        cp ${CONFIGPATH}/log/logback-access.xml ${CATALINA_BASE}/conf/
         cat > ${CATALINA_BASE}/conf/server.xml <<- SERVERXML
 <?xml version='1.0' encoding='utf-8'?>
 <Server port="8005" shutdown="SHUTDOWN">
