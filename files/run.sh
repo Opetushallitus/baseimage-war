@@ -187,7 +187,7 @@ SERVERXML
         ;;
     esac
 
-    CONTEXT="${BASEPATH}/oph-configuration/context.xml"
+    CONTEXT="/etc/oph/tomcat/context.xml"
     if [ -f ${CONTEXT} ]; then
       echo "Create context.conf"
       j2 ${CONTEXT} ${VARS} > ${CATALINA_BASE}/conf/context.xml || true
