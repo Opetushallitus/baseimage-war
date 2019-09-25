@@ -11,9 +11,8 @@ apk --no-cache add \
   jq \
   openssh \
   openssl \
-  python \
+  python3 \
   py-jinja2 \
-  py-pip \
   ttf-dejavu \
   unzip \
   wget \
@@ -24,13 +23,9 @@ ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so && \
   ln -s /lib/libuuid.so.1 /usr/lib/libuuid.so.1 && \
   ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1
 
-echo "Install specific version of PyYAML for awscli, fixes version conflict"
-rm -rf /usr/lib/python3/dist-packages/PyYAML-*
-pip install --ignore-installed 'pyyaml==3.13'  # awscli requires this version. Unfortunately it has CVE-2017-18342
-
 echo "Installing tools for downloading environment configuration during service run script"
-pip install --upgrade pip
-pip install \
+pip3 install --upgrade pip
+pip3 install \
   awscli \
   docker-py \
   j2cli \
