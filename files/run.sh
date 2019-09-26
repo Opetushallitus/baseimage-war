@@ -21,7 +21,9 @@ aws s3 cp s3://${ENV_BUCKET}${env_config_path}${env_config_version}/ ${CONFIGPAT
 # append SSM parameters to $VARS
 ssm_vars=$(env | grep ssm_ || test ${?} = 1)
 for ssm_var in ${ssm_vars}; do
-  echo "$(echo "${ssm_var}" | sed "s/ssm_//g" | sed "s/=/: \"/g")\"" >> "${VARS}"
+  var_name=$(echo "${ssm_var}" | sed "s/ssm_//g" | cut -d "=" -f 1)
+  var_value=$(echo "${ssm_var}" | cut -d "=" -f 2-)
+  echo "${var_name}: \"${var_value}\"" >> "${VARS}"
 done
 
 cp -vr ${CONFIGPATH}/* ${BASEPATH}/oph-configuration/
