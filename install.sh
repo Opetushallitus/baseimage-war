@@ -18,6 +18,8 @@ apk --no-cache add \
   wget \
   zip
 
+ln -s /usr/bin/python3 /usr/bin/python
+
 echo "Kludging font libraries in place"
 ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so && \
   ln -s /lib/libuuid.so.1 /usr/lib/libuuid.so.1 && \
