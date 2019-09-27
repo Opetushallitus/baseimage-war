@@ -17,6 +17,8 @@ apk --no-cache add \
   wget \
   zip
 
+ln -s /usr/bin/python3 /usr/bin/python
+
 echo "Installing tools for downloading environment configuration during service run script"
 pip3 install --upgrade pip
 pip3 install \
