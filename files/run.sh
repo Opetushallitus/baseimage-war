@@ -65,7 +65,7 @@ ln -s /home/oph/logs/ ${CATALINA_BASE}/logs
 mkdir -p ${CATALINA_TMPDIR}
 
 echo "Copying war file to CATALINA_BASE/webapps"
-cp -vr /opt/tomcat/webapps/* ${CATALINA_BASE}/webapps/
+ln -s /opt/tomcat/webapps/* /home/oph/tomcat/webapps/
 cp -vr /opt/tomcat/conf/* ${CATALINA_BASE}/conf/
 
 
