@@ -12,7 +12,11 @@ You can either use the latest master build (recommended):
 
     export BASE_IMAGE="baseimage-war:master"
 
-or a specific version:
+or the latest build of a specific branch:
+
+    export BASE_IMAGE="baseimage-war:jdk11"
+
+or a specific build:
 
     export BASE_IMAGE="baseimage-war:ci-9"
 
