@@ -54,14 +54,15 @@ rm -v glibc-*.apk
 /usr/glibc-compat/bin/localedef -i fi_FI -f UTF-8 fi_FI.UTF-8
 
 echo "Creating cache directories for package managers"
-mkdir /root/.m2/
-mkdir /root/.ivy2/
+mkdir /home/oph/.m2/
+mkdir /home/oph/.ivy2/
 
 echo "Installing Prometheus jmx_exporter"
 JMX_EXPORTER_VERSION="0.12.0"
 wget -q https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/${JMX_EXPORTER_VERSION}/jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar
 mv jmx_prometheus_javaagent-${JMX_EXPORTER_VERSION}.jar jmx_prometheus_javaagent.jar
 echo "6c7d195cb67a09517ec1469c214b3d8ab0030bdbaa9e2ee06a9995d7b03c707c  jmx_prometheus_javaagent.jar" |sha256sum -c
+mv jmx_prometheus_javaagent.jar /usr/local/bin/
 
 echo "Installing Prometheus node_exporter"
 NODE_EXPORTER_VERSION="0.18.1"
@@ -69,11 +70,11 @@ wget -q https://github.com/prometheus/node_exporter/releases/download/v${NODE_EX
 echo "b2503fd932f85f4e5baf161268854bf5d22001869b84f00fd2d1f57b51b72424  node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz" |sha256sum -c
 tar -xvzf node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
 rm node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
-mv node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64/node_exporter /root/
+mv node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64/node_exporter /usr/local/bin/
 rm -rf node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64
 
 echo "Init Prometheus config file"
-echo "{}" > /root/prometheus.yaml
+echo "{}" > /etc/prometheus.yaml
 
 echo "Installing Tomcat"
 TOMCAT_DL_PREFIX="https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.88/bin"
@@ -83,18 +84,12 @@ echo "675abed4e71e95793f549a2077d891e28f2f8e3427aca180d2ff6607be8885be  /tmp/${T
 mkdir -p /opt/tomcat
 tar xf /tmp/${TOMCAT_PACKAGE} -C /opt/tomcat --strip-components=1
 rm -rf /opt/tomcat/webapps/*
-
-echo "Copying Tomcat configuration"
-mkdir -p /root/oph-configuration/
-mv /tmp/tomcat-config/server.xml /opt/tomcat/conf/
-mv /tmp/tomcat-config/ehcache.xml /root/oph-configuration/
-mv /tmp/tomcat-config/jars/*.jar /opt/tomcat/lib/
+chown -R oph:oph /opt/tomcat
 
 echo "Clearing temp directory"
 ls -la /tmp/
-rm -rf /tmp/tomcat-config
 rm -rf /tmp/*.tar.gz
 rm -rf /tmp/hsperfdata_root
 
 echo "Make run script executable"
-chmod ug+x /tmp/scripts/run
+chmod ug+x /usr/local/bin/run
