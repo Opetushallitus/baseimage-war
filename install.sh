@@ -80,10 +80,15 @@ tar xf /tmp/${TOMCAT_PACKAGE} -C /opt/tomcat --strip-components=1
 rm -rf /opt/tomcat/webapps/*
 chown -R oph:oph /opt/tomcat
 
+echo "Copying Tomcat configuration"
+mv /tmp/tomcat/conf/server.xml /opt/tomcat/conf/
+mv /tmp/tomcat/lib/*.jar /opt/tomcat/lib/
+
 echo "Clearing temp directory"
 ls -la /tmp/
 rm -rf /tmp/*.tar.gz
 rm -rf /tmp/hsperfdata_root
+rm -rf /tmp/tomcat
 
 echo "Make run script executable"
 chmod ug+x /usr/local/bin/run
