@@ -11,7 +11,7 @@ export CATALINA_HOME="/opt/tomcat"
 export CATALINA_TMPDIR="/tmp/catalina_temp"
 
 echo "Copying templates to home directory"
-cp -vr /etc/oph/* ${BASEPATH}
+cp -vr /etc/oph/. ${BASEPATH}
 
 echo "Downloading environment-specific properties"
 env_config_path=${ENV_CONFIG_S3_PATH:-/services/}
@@ -26,6 +26,7 @@ for ssm_var in ${ssm_vars}; do
   echo "${var_name}: \"${var_value}\"" >> "${VARS}"
 done
 
+mkdir -p ${BASEPATH}/oph-configuration
 cp -vr ${CONFIGPATH}/* ${BASEPATH}/oph-configuration/
 
 echo "Overwriting with AWS-specific configs..."
