@@ -97,4 +97,4 @@ rm -rf /tmp/hsperfdata_root
 rm -rf /tmp/tomcat
 
 echo "Make run script executable"
-chmod ug+x /usr/local/bin/run
+chmod +x /usr/local/bin/run
