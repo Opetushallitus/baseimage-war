@@ -1,5 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
 #
+set -e
 
 BASEPATH="/home/oph"
 CONFIGPATH="/home/oph/oph-environment"
