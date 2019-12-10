@@ -5,7 +5,6 @@ set -e
 BASEPATH="/home/oph"
 CONFIGPATH="/home/oph/oph-environment"
 VARS="${CONFIGPATH}/opintopolku.yml"
-CERT="${CONFIGPATH}/cert/ssl.pem"
 LOGPATH="${CONFIGPATH}/log"
 export CATALINA_BASE="/home/oph/tomcat"
 export CATALINA_HOME="/opt/tomcat"
@@ -47,13 +46,6 @@ done
 
 echo "Copying keystore file to home directory"
 cp /opt/java/openjdk/jre/lib/security/cacerts /home/oph/
-
-CACERTSPWD="`grep "java_cacerts_pwd" ${CONFIGPATH}/opintopolku.yml | grep -o -e '\".*\"' | sed 's/^\"\(.*\)\"$/\1/'`"
-if [ -f "${CERT}" ]; then
-  echo "Installing local certificates to Java..."
-  openssl x509 -outform der -in ${CERT} -out /tmp/ssl.der
-  keytool -import -noprompt -storepass ${CACERTSPWD} -alias opintopolku -keystore /home/oph/cacerts -file /tmp/ssl
-fi
 
 export LC_CTYPE=fi_FI.UTF-8
 export JAVA_TOOL_OPTIONS='-Dfile.encoding=UTF-8'
