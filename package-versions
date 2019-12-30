@@ -39,7 +39,7 @@ openssh-keygen-8.1_p1-r0
 openssh-server-8.1_p1-r0
 openssh-server-common-8.1_p1-r0
 openssh-sftp-server-8.1_p1-r0
-openssl-1.1.1d-r0
+openssl-1.1.1d-r2
 py-jinja2-2.10-r3
 py-markupsafe-1.1.1-r1
 py3-jinja2-2.10-r3
