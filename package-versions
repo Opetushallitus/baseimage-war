@@ -11,9 +11,9 @@ expat-2.2.9-r1
 fontconfig-2.13.1-r2
 freetype-2.10.1-r0
 gdbm-1.13-r1
-glibc-2.30-r0
-glibc-bin-2.30-r0
-glibc-i18n-2.30-r0
+glibc-2.31-r0
+glibc-bin-2.31-r0
+glibc-i18n-2.31-r0
 jq-1.6-r0
 libbz2-1.0.8-r1
 libc-utils-0.7.2-r0
