@@ -26,8 +26,8 @@ libtls-standalone-2.9.1-r0
 libuuid-2.34-r1
 musl-1.1.24-r2
 musl-utils-1.1.24-r2
-ncurses-libs-6.1_p20200118-r3
-ncurses-terminfo-base-6.1_p20200118-r3
+ncurses-libs-6.1_p20200118-r4
+ncurses-terminfo-base-6.1_p20200118-r4
 oniguruma-6.9.4-r0
 openssh-8.1_p1-r0
 openssh-client-8.1_p1-r0
